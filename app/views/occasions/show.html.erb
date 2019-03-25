@@ -10,3 +10,20 @@
 <% @occasion.users.each do |user| %>
 <%= user.name %>
 <% end %>
+
+<%= form_tag messages_path do %>
+    <label >Add Message:</label>
+    <%= text_field_tag :"message[content]" %>
+    <%= hidden_field_tag :"message[occasion_id]", @occasion.id %>
+    <%= hidden_field_tag :"message[user_id]", 1 %>
+    <%= submit_tag "Submit Message" %>
+
+<% end %>
+
+<h3>All messages</h3>
+<div class="message_box">
+    <% @my_messages.each do |msg|%>
+        <p><%= msg.content %></p>
+    <% end %>
+</div>
+

@@ -2,6 +2,7 @@ class OccasionsController < ApplicationController
   before_action :find_occasion, only: [:show, :edit, :update]
 
   def show
+    @my_messages = @occasion.messages.reverse
   end
 
   def new
