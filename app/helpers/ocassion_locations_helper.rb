@@ -1,0 +1,2 @@
+module OcassionLocationsHelper
+end
