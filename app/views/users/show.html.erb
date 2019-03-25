@@ -1,0 +1,21 @@
+ <% if flash[:update_success] %>
+   <h4><%= flash[:update_success] %></h4>
+ <% end %>
+
+ <h1><%= @user.name %></h1>
+
+ <h2>Age:<%= @user.age %></h2>
+ <h2>Bio:</h2>
+ <p><%= @user.bio %></p><br>
+ <br>
+
+<button><%= link_to  "Create new event", new_occasion_path %></button><br><br><br>
+
+
+ <% if @user.occasions %>
+    <% @user.occasions.each do |occasion| %>
+        <%= link_to occasion.name, occasion %>
+    <% end %>
+ <% end %>
+
+<button><%= link_to  "Edit Profile", edit_user_path %></button>
