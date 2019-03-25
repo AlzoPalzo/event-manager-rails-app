@@ -1,2 +1,0 @@
-class OcassionLocation < ApplicationRecord
-end

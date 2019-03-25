@@ -29,8 +29,8 @@ ActiveRecord::Schema.define(version: 2019_03_25_103136) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "ocassion_locations", force: :cascade do |t|
-    t.integer "ocassion_id"
+  create_table "occasion_locations", force: :cascade do |t|
+    t.integer "occasion_id"
     t.integer "location_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -45,7 +45,7 @@ ActiveRecord::Schema.define(version: 2019_03_25_103136) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "user_events", force: :cascade do |t|
+  create_table "user_occasions", force: :cascade do |t|
     t.integer "user_id"
     t.integer "occasion_id"
     t.datetime "created_at", null: false
