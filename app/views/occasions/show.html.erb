@@ -5,3 +5,8 @@
 
 <h2>Date and Time</h2>
 <p><%= @occasion.date_time %></p>
+
+<h2>Invitees</h2>
+<% @occasion.users.each do |user| %>
+<%= user.name %>
+<% end %>
