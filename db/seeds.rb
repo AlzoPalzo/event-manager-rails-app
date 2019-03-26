@@ -10,3 +10,4 @@ khang = User.create(name: "Khang", age: "25", bio: "Crypto man.")
 ali = User.create(name: "Ali", age: "25", bio: "Literally, actually the best.")
 
 occasion1 = khang.occasions.create(name: 'Flatiron end of mod 2 party', date_time: Time.now, description: "The coolest party of the month")
+ 
