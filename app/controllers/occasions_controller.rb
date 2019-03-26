@@ -12,7 +12,7 @@ class OccasionsController < ApplicationController
 
   def create
     @occasion = Occasion.new(occasion_params)
-
+    byebug
     if @occasion.save
       redirect_to @occasion
     else
