@@ -2,11 +2,11 @@
 
 <h2>Location</h2>
 
-<% if @occasion.locations.count == 2  %> 
-    <p><b> Start Location: </b> <%= @occasion.locations[0].name %></p> 
-    <p><b> Final Location: </b><%= @occasion.locations[1].name %> </p>
+<% if @occasion.locations.count == 2  %>
+    <p><emp> Start Location: </emp> <%= link_to @occasion.locations[0].name, location_path(@occasion.locations[0]) %></p>
+    <p><emp> Final Location: </emp> <%= link_to @occasion.locations[1].name, location_path(@occasion.locations[1]) %> </p>
 <% else %>
-    <p><b> Location: </b><%= @occasion.locations[0].name %></p>  
+    <p><emp> Location: </emp><%= link_to @occasion.locations[0].name, location_path(@occasion.locations[0])%></p>
 <% end %>
 
 <h2>Description</h2>
@@ -17,7 +17,7 @@
 
 <h2>Invitees</h2>
 <% @occasion.users.each do |user| %>
-<%= user.name %>
+<%= link_to user.name, user %>
 <% end %>
 
 <%= form_tag messages_path do %>
@@ -32,7 +32,6 @@
 <h3>All messages</h3>
 <div class="message_box">
     <% @my_messages.each do |msg|%>
-        <p><%= msg.user.name %>: <%= msg.content %></p>
+        <p><%= msg.created_at.strftime("%-d %b %Y at %H:%M")  %>, <%= msg.user.name %>: <%= msg.content %></p>
     <% end %>
 </div>
-

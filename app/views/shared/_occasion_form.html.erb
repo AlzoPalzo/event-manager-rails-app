@@ -6,13 +6,14 @@
 
 
 <%= form_for @occasion do |f| %>
+  <%= f.hidden_field :user_id, value: current_user.id%>
   <%= f.label :name %>
   <%= f.text_field :name, {autofocus: true} %><br><br>
   <%= f.label "Location" %>
   <%= f.text_field :start_location, list: "location", value: ''%>
   <datalist id="location">
     <% @locations.each do |location| %>
-      <option value="<%= location.name %> <%=location.rating %> <%= location.id %>"></option>
+      <option value="<%= location.name %> <%=location.rating %>"></option>
     <% end %>
   </datalist><br><br>
 
@@ -20,7 +21,7 @@
   <%= f.text_field :end_location, list: "location", value: '', placeholder: '(If different)'%>
   <datalist id="location">
     <% @locations.each do |location| %>
-    <option value="<%= location.name %> <%=location.rating %> <%= location.id %>"></option>
+    <option value="<%= location.name %> <%=location.rating %>"></option>
     <% end %>
   </datalist><br><br>
 
@@ -29,6 +30,6 @@
   <%= f.label :date_time %>
   <%= f.datetime_field :date_time %><br><br>
   <%= f.label "friends:" %>
-  <%= f.collection_check_boxes :user_ids, User.all, :id, :name %><br><br>
+  <%= f.collection_check_boxes :user_ids, @users, :id, :name %><br><br>
   <%= f.submit %>
 <% end %>

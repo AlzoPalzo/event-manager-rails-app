@@ -4,7 +4,8 @@ class Location < ApplicationRecord
 
     def star_rating
         star_rating = ""
-        self.rating.times do
+        #self.rating.times do
+        5.times do
              star_rating << "\u2605".encode('utf-8')
         end
         star_rating
