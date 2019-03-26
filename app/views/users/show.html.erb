@@ -17,8 +17,9 @@
         <%= link_to occasion.name, occasion %>
     <% end %>
  <% end %>
-
-<button><%= link_to  "Edit Profile", edit_user_path %></button><br>
+<% if @user == current_user %>
+  <button><%= link_to  "Edit Profile", edit_user_path %></button><br>
+<% end %>
 
 
 <p>You're currently logged in as <%= current_user.name %></p>
