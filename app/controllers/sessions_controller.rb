@@ -18,5 +18,8 @@ class SessionsController < ApplicationController
       redirect_to login_path
     end
 
+    def index
+    end
+
 
 end
