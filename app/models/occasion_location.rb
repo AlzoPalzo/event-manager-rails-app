@@ -1,4 +1,4 @@
-class OcassionLocation < ApplicationRecord
+class OccasionLocation < ApplicationRecord
     belongs_to :occasion
-    belongs_to :occasion_location
+    belongs_to :location
 end

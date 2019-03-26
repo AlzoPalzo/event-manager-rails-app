@@ -7,6 +7,7 @@ class OccasionsController < ApplicationController
 
   def new
     @occasion = Occasion.new
+    @locations = Location.all
   end
 
   def create
@@ -27,6 +28,19 @@ class OccasionsController < ApplicationController
   end
 
   def occasion_params
-    params.require(:occasion).permit(:name, :user_id, :date_time, :description, user_ids: [])
+
+    p = params.require(:occasion).permit(:name, :user_id, :date_time, :description, user_ids: [])
+    location_ids = []
+    location_ids[0] = find_location_id(params[:occasion][:start_location])
+    if params[:occasion][:end_location] != ""
+      location_ids[1] = find_location_id(params[:occasion][:end_location])
+    end
+    p[:location_ids] = location_ids
+    p
   end
+
+  def find_location_id(location_string)
+    @location_id = location_string.split(" ").last
+  end
+
 end

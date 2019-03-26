@@ -1,5 +1,14 @@
 <h1><%= @occasion.name %></h1>
 
+<h2>Location</h2>
+
+<% if @occasion.locations.count == 2  %> 
+    <p><b> Start Location: </b> <%= @occasion.locations[0].name %></p> 
+    <p><b> Final Location: </b><%= @occasion.locations[1].name %> </p>
+<% else %>
+    <p><b> Location: </b><%= @occasion.locations[0].name %></p>  
+<% end %>
+
 <h2>Description</h2>
 <p><%= @occasion.description %></p>
 
