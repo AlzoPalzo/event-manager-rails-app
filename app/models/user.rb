@@ -2,6 +2,7 @@ class User < ApplicationRecord
     has_many :user_occasions
     has_many :occasions, through: :user_occasions
     has_many :messages
+    has_many :friends
 
     has_secure_password
 
