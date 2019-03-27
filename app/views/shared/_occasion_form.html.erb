@@ -17,6 +17,18 @@
     <% end %>
   </datalist><br><br>
 
+  <%= f.label :new_location %>
+  <%= f.fields_for :locations, @occasion.locations.build do |location_fields| %>
+    <%= f.label :name %>
+    <%= location_fields.text_field :name %>
+    <%= f.label :description %>
+    <%= location_fields.text_field :description %>
+    <%= f.label :rating %>
+    <%= location_fields.number_field :rating %>
+    <%= f.label :address %>
+    <%= location_fields.text_field :address %>
+  <% end %>
+
   <%= f.label "End location" %>
   <%= f.text_field :end_location, list: "location", value: '', placeholder: '(If different)'%>
   <datalist id="location">

@@ -5,6 +5,8 @@ class Occasion < ApplicationRecord
     has_many :occasion_locations
     has_many :locations, through: :occasion_locations
 
+    accepts_nested_attributes_for :locations
+
 
     validates :name, presence: true, uniqueness: true, length:  { maximum: 70 }
     validates :date_time, date:

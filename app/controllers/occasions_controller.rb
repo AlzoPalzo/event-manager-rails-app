@@ -13,6 +13,7 @@ class OccasionsController < ApplicationController
   end
 
   def create
+    #byebug
     @occasion = Occasion.new(occasion_params)
     if @occasion.save
       redirect_to @occasion
@@ -29,10 +30,11 @@ class OccasionsController < ApplicationController
   end
 
   def occasion_params
-    p = params.require(:occasion).permit(:name, :user_id, :date_time, :description, user_ids: [])
+    p = params.require(:occasion).permit(:name, :user_id, :date_time, :description, user_ids: [], locations_attributes: [:name, :description, :rating, :address])
     location_ids = []
-    location_ids[0] = find_location_id(params[:occasion][:start_location])
-    if params[:occasion][:end_location] != ""
+    if params[:occasion][:start_location] != ""
+      location_ids[0] = find_location_id(params[:occasion][:start_location])
+    elsif params[:occasion][:end_location] != ""
       location_ids[1] = find_location_id(params[:occasion][:end_location])
     end
     p[:location_ids] = location_ids
