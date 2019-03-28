@@ -1,2 +1,0 @@
-class OccasionLocationsController < ApplicationController
-end

@@ -2,10 +2,9 @@ class Occasion < ApplicationRecord
     has_many :user_occasions
     has_many :users, through: :user_occasions
     has_many :messages
-    has_many :occasion_locations
-    has_many :locations, through: :occasion_locations
+    belongs_to :location
 
-    accepts_nested_attributes_for :locations
+    #accepts_nested_attributes_for :locations
 
 
     validates :name, presence: true, uniqueness: true, length:  { maximum: 70 }

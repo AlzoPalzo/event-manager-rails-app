@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
   resources :friends
-  resources :ocassion_locations
   resources :messages
   resources :user_occasions
   resources :locations

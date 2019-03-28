@@ -1,8 +1,14 @@
-<h1><%= @location.name  %> <%= @location.star_rating %> </h1>
-
-
 <h3>Address:</h3>
 <%= @location.address %>
 
-<H3>Description:</H3>
-<%= @location.description %>
+<h3>latitude:</h3>
+<%= @location.latitude %>
+
+<h3>longitude:</h3>
+<%= @location.longitude %>
+
+
+<p>
+<%= image_tag "https://maps.googleapis.com/maps/api/staticmap?zoom=17&size=400x300&markers=size:small%7Ccolor:red%7C#{@location.latitude},#{@location.longitude}&key=AIzaSyDbvhEUpTMyQu3ADyXLOMxQWllZ0ePdPWY
+", alt: "Map" %>
+</p>
