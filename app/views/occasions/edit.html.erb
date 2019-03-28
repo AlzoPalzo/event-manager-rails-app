@@ -1,0 +1,30 @@
+<%if flash[:occasion_error] %>
+<% flash[:occasion_error].each do |msg| %>
+<p><%= msg %></p>
+<% end  %>
+<%end  %>
+
+
+<h1>Edit <%= @occasion.name %></h1>
+
+<%= form_tag "/occasions/#{@occasion.id}", method: :put do %>
+<%= hidden_field_tag :"occasion[user_id]", current_user.id %>
+<label>Name:</label>
+<%= text_field_tag :"occasion[name]", value=@occasion.name %><br><br>
+<label>description:</label>
+<%= text_area_tag :"occasion[description]", value=@occasion.description %><br><br>
+<label>Date and time:</label>
+<%= datetime_field_tag :"occasion[date_time]", value=@occasion.date_time %><br><br>
+<label>Invite:</label>
+<%= collection_check_boxes(:occasion, :user_ids, @users, :id, :name) %><br><br>
+
+<label>Address:</label>
+<%= text_field_tag :"occasion[address]", value=@occasion.location.address %> <br><br>
+
+<label>Public event?</label>
+<%= hidden_field_tag :"occasion[public_event]", '' %>
+<%= check_box_tag :"occasion[public_event]", checked = true %> <br><br>
+
+<%= submit_tag  %>
+
+<% end %>

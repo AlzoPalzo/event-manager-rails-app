@@ -10,11 +10,9 @@ class OccasionsController < ApplicationController
   def new
     @occasion = Occasion.new
     @users = User.all
-    @locations = Location.all
   end
 
   def create
-    byebug
     @occasion = Occasion.new(occasion_params)
     if @occasion.save
       redirect_to @occasion
@@ -22,6 +20,24 @@ class OccasionsController < ApplicationController
       flash[:occasion_error] = @occasion.errors.full_messages
       redirect_to new_occasion_path
     end
+  end
+
+  def edit
+    @users = User.all
+  end
+  
+  def update
+    @occasion.update(occasion_params)
+    if @occasion.valid?
+      redirect_to @occasion
+    else
+      flash[:occasion_error] = @occasion.errors.full_messages
+      redirect_to new_occasion_path
+    end
+  end
+
+  def index
+    @occasions = Occasion.all.select {|occasion| occasion.public_event == true}.sort_by{|occasion| occasion.date_time}
   end
 
   private

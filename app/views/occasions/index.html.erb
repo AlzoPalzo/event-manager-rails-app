@@ -1,0 +1,6 @@
+<h1>All public events</h1>
+
+<% @occasions.each do |occasion| %>
+    Event: <%= link_to  occasion.name, occasion %> Address: <%= link_to  occasion.location.address, occasion.location %>  Date: <%= occasion.date_time %> <br><br>
+
+<% end %>

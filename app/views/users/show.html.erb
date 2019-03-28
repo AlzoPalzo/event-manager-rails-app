@@ -3,24 +3,73 @@
  <% end %>
 
  <h1><%= @user.name %></h1>
+ 
+ <% if @friend_ids.include?(current_user.id) || @user.id == current_user.id%>
 
  <h2>Age:<%= @user.age %></h2>
  <h2>Bio:</h2>
  <p><%= @user.bio %></p><br>
  <br>
 
-<button><%= link_to  "Create new event", new_occasion_path %></button><br><br><br>
-
-
- <% if @user.occasions %>
-    <% @user.occasions.each do |occasion| %>
-        <%= link_to occasion.name, occasion %>
+  
+<div class="friends">
+  <h3>Friends</h3>
+  <% @friends.each do |friend| %>
+  <%= link_to  find_friend(friend.friend_id).name, user_path(friend.friend_id) %>
+  <% end %>
+  <div class="new_friend">
+      <% if  %>
+        
+        <%= form_tag "/friends" do %>
+        <%= hidden_field_tag :"friend[user_id]", current_user.id %>
+        <%= collection_select(:friend, :friend_id, @non_friends, :id, :name) %>
+        <%= submit_tag "Add Friend"%>
+      <% end %>
     <% end %>
- <% end %>
+  </div>
+  
+  <% if !@requests.empty?  && current_user.id == @user.id%>
+    
+  <div class="friend_requests">
+    <h3>Friend requests</h3>
+    <%= form_tag "/friends/accept" do %>
+    <% @requests.each do |request| %> <!-- requests is friends which have accepted => false -->
+    <%= find_friend(request.user_id).name %>
+    <%= check_box_tag :"user_ids[]", request.user_id %> <br>
+    <% end %>
+    <%= submit_tag "Accept requests"%>
+    <% end %>
+    
+  </div>
+  <% end %>
+</div>
+
+<h3>My Events</h3>
+<% if @user.occasions %>
+<% @user.occasions.each do |occasion| %>
+<%= link_to occasion.name, occasion %>
+<% end %>
+<% end %>
 <% if @user == current_user %>
-  <button><%= link_to  "Edit Profile", edit_user_path %></button><br>
+<button><%= link_to  "Edit Profile", edit_user_path %></button><br>
 <% end %>
 
+<button><%= link_to  "Create new event", new_occasion_path %></button><br><br><br>
 
 <p>You're currently logged in as <%= current_user.name %></p>
 <button><%= link_to  "Logout", logout_path %></button>
+
+<% elsif @requested_friend_ids.include?(@user.id) %>
+  <p>You have already sent a request to this user </p>
+<% else %>
+<h3>You are not friends with this user</h3>
+
+  <div class="not_current_friend">
+    <%= form_tag "/friends" do %>
+    <%= hidden_field_tag :"friend[friend_id]",  @user.id%>
+    <%= hidden_field_tag :"friend[user_id]", current_user.id %>
+    <%= submit_tag "Sent friend request"%>
+    <% end %>
+  </div>
+
+<% end %>
