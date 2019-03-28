@@ -13,6 +13,7 @@ class OccasionsController < ApplicationController
   end
 
   def create
+    byebug
     @occasion = Occasion.new(occasion_params)
     if @occasion.save
       redirect_to @occasion
@@ -30,19 +31,25 @@ class OccasionsController < ApplicationController
 
   def occasion_params
     p = params.require(:occasion).permit(:name, :user_id, :date_time, :description, user_ids: [])
-    location_ids = []
-    location_ids[0] = find_location_id(params[:occasion][:start_location])
-    if params[:occasion][:end_location] != ""
-      location_ids[1] = find_location_id(params[:occasion][:end_location])
-    end
-    p[:location_ids] = location_ids
+
+    location_id = Location.create_or_find_by(address: params[:occasion][:address])
+
+    p[:location_id] = location_id
     return p
+    # location_ids = []
+    # if params[:occasion][:start_location] != ""
+    #   location_ids[0] = find_location_id(params[:occasion][:start_location])
+    # elsif params[:occasion][:end_location] != ""
+    #   location_ids[1] = find_location_id(params[:occasion][:end_location])
+    # end
+    # p[:location_ids] = location_ids
+    # return p
   end
 
   #move below logic to model?
-  def find_location_id(location_string_rating)
-    @location_name = location_string_rating.slice(0...-6)
-    @location_id = Location.find_by(name: @location_name).id
-  end
+  # def find_location_id(location_string_rating)
+  #   @location_name = location_string_rating.slice(0...-6)
+  #   @location_id = Location.find_by(name: @location_name).id
+  # end
 
 end

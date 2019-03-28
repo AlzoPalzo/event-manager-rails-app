@@ -1,7 +1,7 @@
 <% if flash[:user_error] %>
-    <% flash[:user_error].each do |msg| %>
-        <p><%= msg %></p>
-    <% end %>
+  <% flash[:user_error].each do |msg| %>
+    <p><%= msg %></p>
+  <% end %>
 <% end %>
 
 <%= form_for @user do |f| %>

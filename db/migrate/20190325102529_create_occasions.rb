@@ -5,7 +5,7 @@ class CreateOccasions < ActiveRecord::Migration[5.2]
       t.integer :user_id
       t.datetime :date_time
       t.string :description
-
+      t.integer :location_id
       t.timestamps
     end
   end

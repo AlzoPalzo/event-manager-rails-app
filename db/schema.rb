@@ -20,10 +20,9 @@ ActiveRecord::Schema.define(version: 2019_03_26_101736) do
   end
 
   create_table "locations", force: :cascade do |t|
-    t.string "name"
-    t.integer "rating"
     t.string "address"
-    t.string "description"
+    t.float "latitude"
+    t.float "longitude"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -36,18 +35,12 @@ ActiveRecord::Schema.define(version: 2019_03_26_101736) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "occasion_locations", force: :cascade do |t|
-    t.integer "occasion_id"
-    t.integer "location_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "occasions", force: :cascade do |t|
     t.string "name"
     t.integer "user_id"
     t.datetime "date_time"
     t.string "description"
+    t.integer "location_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
