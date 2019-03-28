@@ -1,19 +1,20 @@
 <h1><%= @occasion.name %></h1>
+<% if current_user.id == @admin.id %>
+  <button><%= link_to  "Edit event", edit_occasion_path(@occasion) %></button>
+<% end %>
 
 <h2>Location</h2>
 
-<% if @occasion.locations.count == 2  %>
-    <p><emp> Start Location: </emp> <%= link_to @occasion.locations[0].name, location_path(@occasion.locations[0]) %></p>
-    <p><emp> Final Location: </emp> <%= link_to @occasion.locations[1].name, location_path(@occasion.locations[1]) %> </p>
-<% else %>
-    <p><emp> Location: </emp><%= link_to @occasion.locations[0].name, location_path(@occasion.locations[0])%></p>
-<% end %>
+<%= link_to  @location.address, location_path(@location) %>
 
 <h2>Description</h2>
 <p><%= @occasion.description %></p>
 
 <h2>Date and Time</h2>
 <p><%= @occasion.date_time %></p>
+
+<h2>Event Admin</h2>
+<%= link_to @admin.name, user_path(@admin) %>
 
 <h2>Invitees</h2>
 <% @occasion.users.each do |user| %>
