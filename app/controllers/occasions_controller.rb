@@ -31,7 +31,7 @@ class OccasionsController < ApplicationController
   end
 
   def occasion_params
-    p = params.require(:occasion).permit(:name, :user_id, :date_time, :description, user_ids: [])
+    p = params.require(:occasion).permit(:name, :user_id, :date_time, :description, :public_event, user_ids: [])
 
     location = Location.find_or_create_by(address: params[:occasion][:address])
     location_id = location.id

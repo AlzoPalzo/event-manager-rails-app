@@ -17,8 +17,11 @@
     <%= collection_check_boxes(:occasion, :user_ids, @users, :id, :name) %><br><br>
 
     <label >Address:</label>
-    <%= text_field_tag :"occasion[address]" %>
+    <%= text_field_tag :"occasion[address]" %> <br><br>
 
+    <label>Public event?</label>
+    <%= hidden_field_tag :"occasion[public_event]", '' %>
+    <%= check_box_tag :"occasion[public_event]", checked = true %> <br><br>
 
     <%= submit_tag  %>
 

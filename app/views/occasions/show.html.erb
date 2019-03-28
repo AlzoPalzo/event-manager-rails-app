@@ -7,6 +7,12 @@
 
 <%= link_to  @location.address, location_path(@location) %>
 
+<h4>Click on map to open google maps</h4>
+<p>
+    <%= link_to  image_tag("https://maps.googleapis.com/maps/api/staticmap?zoom=17&size=400x300&markers=size:small%7Ccolor:red%7C#{@location.latitude},#{@location.longitude}&key=AIzaSyDbvhEUpTMyQu3ADyXLOMxQWllZ0ePdPWY
+", alt: "Map"), "https://maps.google.com/?ll=#{@location.latitude},#{@location.longitude}", target: :_blank %>
+</p>
+
 <h2>Description</h2>
 <p><%= @occasion.description %></p>
 
