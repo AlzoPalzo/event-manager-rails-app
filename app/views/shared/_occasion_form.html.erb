@@ -7,7 +7,7 @@
 
 <%= form_tag occasions_path do %>
     <%= hidden_field_tag :"occasion[user_id]", current_user.id %>
-    <label >Name:</label>
+    <label class="label">Name:</label>
     <%= text_field_tag :"occasion[name]" %><br><br>
     <label >description:</label>
     <%= text_area_tag :"occasion[description]"%><br><br>
