@@ -56,9 +56,6 @@
 
 <button><%= link_to  "Create new event", new_occasion_path %></button><br><br><br>
 
-<p>You're currently logged in as <%= current_user.name %></p>
-<button><%= link_to  "Logout", logout_path %></button>
-
 <% elsif @requested_friend_ids.include?(@user.id) %>
   <p>You have already sent a request to this user </p>
 <% else %>

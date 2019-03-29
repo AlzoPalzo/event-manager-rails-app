@@ -13,3 +13,23 @@
  *= require_tree .
  *= require_self
  */
+ .welcome{
+     padding-left: 35em;     
+ }
+ .word{
+     padding-top: 1%;
+     font-size: 150%
+ }
+
+ .footer{
+     position: fixed;
+     left: 0;
+     bottom: 0;
+     width: 100%;
+     height: 5em;
+     background-color: #E3E7EF;
+     text-align: center;
+     border-top-width: 10%;
+     box-shadow: 10em
+
+ }
