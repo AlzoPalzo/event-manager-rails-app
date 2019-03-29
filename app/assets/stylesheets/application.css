@@ -14,7 +14,7 @@
  *= require_self
  */
  .welcome{
-     padding-left: 35em;     
+     padding-left: 35em;
  }
  .word{
      padding-top: 1%;
@@ -23,6 +23,7 @@
 
  .footer{
      position: relative;
+
      right: 0;
      left: 0;
      bottom: 0%;
@@ -42,3 +43,4 @@
     position: relative;
     font-size: 120%;
  }
+
