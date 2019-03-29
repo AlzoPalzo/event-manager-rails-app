@@ -22,9 +22,8 @@ class FriendsController < ApplicationController
 
                 Friend.create(user_id: current_user.id, friend_id: user_id, accepted: true)
             end
-            redirect_to current_user
         end
-        redirect_to user_path(current_user)
+        redirect_to current_user
     end
 
     private

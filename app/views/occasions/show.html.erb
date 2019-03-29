@@ -43,9 +43,14 @@
 
           <div class="box">
             <h3 class="title is-4">Invitees</h3>
-            <% @occasion.users.each do |user| %>
-              <%= link_to user.name, user %>
-            <% end %>
+            <ul>
+              <% @occasion.users.each do |user| %>
+              <li>
+                <%= link_to user.name, user %>
+              </li>
+              <% end %>
+            </ul>
+
             <% if  !@occasion.users.include?(current_user) %>
               <%= button_to  "Attend event", "#{@occasion.id}/new_attendee" %>
             <% end %>

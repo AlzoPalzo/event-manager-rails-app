@@ -8,7 +8,7 @@
      <h1 class="title is-2"><%= @user.name %></h1>
 
      <% if @user == current_user %>
-      <button class="button is-small><%= link_to  "Edit Profile", edit_user_path %></button>
+      <button class="button is-small"><%= link_to  "Edit Profile", edit_user_path(current_user) %> </button>
      <% end %><br><br>
 
      <% if @friend_ids.include?(current_user.id) || @user.id == current_user.id%>
@@ -30,9 +30,14 @@
            <article class="tile is-child box">
              <p class="title is-4">Friends</p>
              <div class="friends">
-              <% @friends.each do |friend| %>
-              <%= link_to find_friend(friend.friend_id).name, user_path(friend.friend_id) %>
-              <% end %><br><br><br>
+               <ul>
+                 <% @friends.sort_by{|friend| find_friend(friend.friend_id).name}.each do |friend| %>
+                 <li>
+                    <%= link_to find_friend(friend.friend_id).name, user_path(friend.friend_id) %>
+                 </li>
+                 <% end %><br><br><br>
+
+               </ul>
 
               <div class="new_friend">
 
@@ -77,9 +82,13 @@
 
                <div class="box">
                  <% if @user.occasions %>
-                  <% @user.occasions.each do |occasion| %>
-                    <%= link_to occasion.name, occasion %>
+                 <ul>
+                   <% @user.occasions.sort_by{|occasion| occasion.date_time}.each do |occasion| %>
+                   <li>
+                     <%= link_to occasion.name, occasion %>
+                   </li>
                     <% end %>
+                 </ul>
                  <% end %>
                </div>
 
