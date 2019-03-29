@@ -1,5 +1,6 @@
 class OccasionsController < ApplicationController
-  before_action :find_occasion, only: [:show, :edit, :update]
+  before_action :find_occasion, only: [:show, :edit, :update, :new_attendee]
+  before_action :current_user_friends, only: [:edit, :new]
 
   def show
     @my_messages = @occasion.messages.reverse
@@ -9,12 +10,9 @@ class OccasionsController < ApplicationController
 
   def new
     @occasion = Occasion.new
-    @users = User.all
-    @locations = Location.all
   end
 
   def create
-    byebug
     @occasion = Occasion.new(occasion_params)
     if @occasion.save
       redirect_to @occasion
@@ -22,6 +20,28 @@ class OccasionsController < ApplicationController
       flash[:occasion_error] = @occasion.errors.full_messages
       redirect_to new_occasion_path
     end
+  end
+
+  def edit
+  end
+
+  def new_attendee
+    UserOccasion.create(occasion_id: @occasion.id, user_id: current_user.id)
+    redirect_to @occasion
+  end
+
+  def update
+    @occasion.update(occasion_params)
+    if @occasion.valid?
+      redirect_to @occasion
+    else
+      flash[:occasion_error] = @occasion.errors.full_messages
+      redirect_to new_occasion_path
+    end
+  end
+
+  def index
+    @occasions = Occasion.all.select {|occasion| occasion.public_event == true}.sort_by{|occasion| occasion.date_time}
   end
 
   private
@@ -39,5 +59,10 @@ class OccasionsController < ApplicationController
     p[:location_id] = location_id
     return p
 
+  end
+
+  def current_user_friends
+    @friends_objects = current_user.friends.select{|friend| friend.accepted == true}
+    @users = @friends_objects.map{|friend| User.find(friend.friend_id)} 
   end
 end
