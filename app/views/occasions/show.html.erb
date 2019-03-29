@@ -28,6 +28,10 @@
 <% @occasion.users.each do |user| %>
 <%= link_to user.name, user %>
 <% end %>
+<% if  !@occasion.users.include?(current_user) %>
+<%= button_to  "Attend event", "#{@occasion.id}/new_attendee" %>
+<% end %>
+
 
 <%= form_tag messages_path do %>
 <label >Add Message:</label>
