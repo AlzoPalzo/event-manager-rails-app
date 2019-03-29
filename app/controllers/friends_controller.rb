@@ -1,16 +1,16 @@
 class FriendsController < ApplicationController
 
     def new
-    
+
     end
 
     def create
-        byebug
         Friend.create(friend_params)
         redirect_to user_path(current_user)
     end
 
     def accept
+
         # byebug
         if !params[:user_ids]
             redirect_to current_user
@@ -24,7 +24,8 @@ class FriendsController < ApplicationController
             end
             redirect_to current_user
         end
-    end 
+        redirect_to user_path(current_user)
+    end
 
     private
 

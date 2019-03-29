@@ -36,13 +36,6 @@ ActiveRecord::Schema.define(version: 2019_03_28_103127) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "occasion_locations", force: :cascade do |t|
-    t.integer "occasion_id"
-    t.integer "location_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "occasions", force: :cascade do |t|
     t.string "name"
     t.integer "user_id"
