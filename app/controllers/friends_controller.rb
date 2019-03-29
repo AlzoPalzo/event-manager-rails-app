@@ -1,17 +1,15 @@
 class FriendsController < ApplicationController
 
     def new
-    
+
     end
 
     def create
-        byebug
         Friend.create(friend_params)
         redirect_to user_path(current_user)
     end
 
     def accept
-        # byebug
         params[:user_ids].each do |user_id|
             request = Friend.find_by(user_id: user_id, friend_id: current_user.id)
             request.accepted = true
@@ -19,7 +17,8 @@ class FriendsController < ApplicationController
 
             Friend.create(user_id: current_user.id, friend_id: user_id, accepted: true)
         end
-    end 
+        redirect_to user_path(current_user)
+    end
 
     private
 

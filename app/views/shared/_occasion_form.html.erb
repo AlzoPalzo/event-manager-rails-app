@@ -4,25 +4,59 @@
   <% end  %>
 <%end  %>
 
+<div class="container is-fluid">
+  <div class="box">
+    <%= form_tag occasions_path do %>
+      <%= hidden_field_tag :"occasion[user_id]", current_user.id %>
 
-<%= form_tag occasions_path do %>
-    <%= hidden_field_tag :"occasion[user_id]", current_user.id %>
-    <label >Name:</label>
-    <%= text_field_tag :"occasion[name]" %><br><br>
-    <label >description:</label>
-    <%= text_area_tag :"occasion[description]"%><br><br>
-    <label >Date and time:</label>
-    <%= datetime_field_tag :"occasion[date_time]" %><br><br>
-    <label >Invite:</label>
-    <%= collection_check_boxes(:occasion, :user_ids, @users, :id, :name) %><br><br>
+      <div class="field">
+        <div class="control">
+          <label class="label">Name:</label>
+          <%= text_field_tag :"occasion[name]", "", class: "input", placeholder:"Insert the event name"%>
+        </div>
+      </div>
 
-    <label >Address:</label>
-    <%= text_field_tag :"occasion[address]" %> <br><br>
+      <div class="field">
+        <div class="control">
+          <label class="label" >Description:</label>
+          <%= text_area_tag :"occasion[description]", "", class: "textarea", placeholder:"Insert a short description of the event here"%>
+        </div>
+      </div>
 
-    <label>Public event?</label>
-    <%= hidden_field_tag :"occasion[public_event]", '' %>
-    <%= check_box_tag :"occasion[public_event]", checked = true %> <br><br>
+      <div class="field">
+        <div class="control">
+          <label class="label class="label" ">Date and time:</label>
+          <%= datetime_field_tag :"occasion[date_time]", "", class: "input" %>
+        </div>
+      </div>
 
-    <%= submit_tag  %>
+      <div class="field">
+        <div class="checkbox">
+          <label class="label">Invite:</label>
+          <div class="box">
+          <%= collection_check_boxes(:occasion, :user_ids, @users, :id, :name) %>
+          </div>
+        </div>
+      </div>
 
-<% end %>
+      <div class="field">
+        <div class="control">
+          <label class="label"  >Address:</label>
+          <%= text_field_tag :"occasion[address]", "", class: "input" %>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="checkbox">
+          <label class="label" >Public event?</label>
+          <div class="box">
+          <%= hidden_field_tag :"occasion[public_event]", '' %>
+          <%= check_box_tag :"occasion[public_event]", checked = true %> <div class="help"> tick box if yes</div>
+          </div>
+        </div>
+      </div>
+
+      <%= submit_tag  %>
+    <% end %>
+  </div>
+</div>

@@ -1,9 +1,45 @@
-<h1> Login </h1>
+<div class="container">
+  <div class="columns is-centered">
+    <div class="column is-two-thirds">
+      <h1 class="title is-2">Login</h1>
 
-<%= form_tag sessions_path do %>
-  <%= text_field_tag :name, '',  placeholder: 'Login with your name' %>
-    <%= password_field_tag :password, '',  placeholder: 'enter password' %>
-  <%= button_tag :submit %><br><br>
-<%end %>
+      <div class="container is-fluid">
+        <div class="box">
 
-<button><%= link_to "Sign up", new_user_path %></button>
+          <%= form_tag sessions_path do %>
+
+          <div class="field">
+            <div class="control">
+              <%= text_field_tag :name, '', class:'input', placeholder: 'Login with your name' %>
+            </div>
+          </div>
+
+          <div class="field">
+            <div class="control">
+              <%= password_field_tag :password, '', class:'input', placeholder: 'enter password' %>
+            </div>
+          </div>
+
+          <div class="field">
+            <div class="control">
+              <%= button_tag :submit, class:"button" %>
+            </div>
+          </div>
+
+          <button class="button"><%= link_to "Sign up", new_user_path %></button>
+
+
+
+
+          <%end %>
+
+
+
+
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</div>
