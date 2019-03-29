@@ -18,13 +18,10 @@
   <%= link_to  find_friend(friend.friend_id).name, user_path(friend.friend_id) %>
   <% end %>
   <div class="new_friend">
-      <% if  %>
-        
-        <%= form_tag "/friends" do %>
-        <%= hidden_field_tag :"friend[user_id]", current_user.id %>
-        <%= collection_select(:friend, :friend_id, @non_friends, :id, :name) %>
-        <%= submit_tag "Add Friend"%>
-      <% end %>
+      <%= form_tag "/friends" do %>
+      <%= hidden_field_tag :"friend[user_id]", current_user.id %>
+      <%= collection_select(:friend, :friend_id, @non_friends, :id, :name) %>
+      <%= submit_tag "Add Friend"%>
     <% end %>
   </div>
   

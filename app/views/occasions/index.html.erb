@@ -1,6 +1,24 @@
-<h1>All public events</h1>
+<h1 class="title is-2">All public events</h1>
 
-<% @occasions.each do |occasion| %>
-    Event: <%= link_to  occasion.name, occasion %> Address: <%= link_to  occasion.location.address, occasion.location %>  Date: <%= occasion.date_time %> <br><br>
-
-<% end %>
+<div class="container is-fluid is-centered">
+    <div class="box">
+        <% @occasions.each do |occasion| %>
+        <div class="box">
+            <div class="columns">
+                    <div class="column is-two-thirds">
+                        <h3 class="title is-4">Event: <%= link_to  occasion.name, occasion %> </h3>
+                        <span class="occ"><strong>Location: </strong></span> <span class="occ2"><%= occasion.location.address %></span> <br><br>
+                        <span class="occ"><strong>Description: </strong> </span> <span class="occ2"><%= occasion.description %></span> <br><br>
+                        <span class="occ"> <strong> Date: </strong> </span> <span class="occ2"><%= occasion.date_time %></span>
+                    </div>
+                    <div class="column">
+                        <p>
+                            <%= link_to  image_tag("https://maps.googleapis.com/maps/api/staticmap?zoom=17&size=400x300&markers=size:small%7Ccolor:red%7C#{occasion.location.latitude},#{occasion.location.longitude}&key=AIzaSyDbvhEUpTMyQu3ADyXLOMxQWllZ0ePdPWY
+                            ", alt: "Map"), "https://maps.google.com/?ll=#{occasion.location.latitude},#{occasion.location.longitude}", target: :_blank %>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        <% end %>
+    </div>
+</div>
