@@ -1,56 +1,95 @@
-<h1><%= @occasion.name %></h1>
-<% if current_user.id == @admin.id %>
-  <button><%= link_to  "Edit event", edit_occasion_path(@occasion) %></button>
-<% end %>
-
-<% if @occasion.public_event == true || @occasion.user_ids.include?(current_user.id) || @occasion.user_id == current_user.id %>
-  
-<h2>Location</h2>
-
-<%= link_to  @location.address, location_path(@location) %>
-
-<h4>Click on map to open google maps</h4>
-<p>
-    <%= link_to  image_tag("https://maps.googleapis.com/maps/api/staticmap?zoom=17&size=400x300&markers=size:small%7Ccolor:red%7C#{@location.latitude},#{@location.longitude}&key=AIzaSyDbvhEUpTMyQu3ADyXLOMxQWllZ0ePdPWY
-    ", alt: "Map"), "https://maps.google.com/?ll=#{@location.latitude},#{@location.longitude}", target: :_blank %>
-</p>
-
-<h2>Description</h2>
-<p><%= @occasion.description %></p>
-
-<h2>Date and Time</h2>
-<p><%= @occasion.date_time %></p>
-
-<h2>Event Admin</h2>
-<%= link_to @admin.name, user_path(@admin) %>
-
-<h2>Invitees</h2>
-<% @occasion.users.each do |user| %>
-<%= link_to user.name, user %>
-<% end %>
-<% if  !@occasion.users.include?(current_user) %>
-<%= button_to  "Attend event", "#{@occasion.id}/new_attendee" %>
-<% end %>
 
 
-<%= form_tag messages_path do %>
-<label >Add Message:</label>
-<%= text_field_tag :"message[content]" %>
-<%= hidden_field_tag :"message[occasion_id]", @occasion.id %>
-<%= hidden_field_tag :"message[user_id]", current_user.id %>
-<%= submit_tag "Submit Message" %>
+<div class="columns is-centered">
+  <div class="column is-two-thirds">
+    <h1 class="title is-2"><%= @occasion.name %></h1>
+    <div class="container is-fluid">
+      <div class="box">
 
-<% end %>
 
-<h3>All messages</h3>
-<div class="message_box">
-    <% @my_messages.each do |msg|%>
-    <p><%= msg.created_at.strftime("%-d %b %Y at %H:%M")  %>, <%= msg.user.name %>: <%= msg.content %></p>
-    <% end %>
+        <% if current_user.id == @admin.id %>
+          <button class="button is-small"><%= link_to  "Edit event", edit_occasion_path(@occasion) %></button>
+        <% end %><br><br><br>
+
+        <% if @occasion.public_event == true || @occasion.user_ids.include?(current_user.id) || @occasion.user_id == current_user.id %>
+
+          <div class="box">
+            <h3 class="title is-4">Location</h3>
+            <%= link_to @location.address, location_path(@location) %><br><br>
+            <p>
+                <%= link_to  image_tag("https://maps.googleapis.com/maps/api/staticmap?zoom=17&size=400x300&markers=size:small%7Ccolor:red%7C#{@location.latitude},#{@location.longitude}&key=AIzaSyDbvhEUpTMyQu3ADyXLOMxQWllZ0ePdPWY
+                ", alt: "Map"), "https://maps.google.com/?ll=#{@location.latitude},#{@location.longitude}", target: :_blank %>
+            </p>
+            <em>Click on map to open google maps</em>
+          </div>
+
+          <div class="box">
+            <h3 class="title is-4">Description</h3>
+            <p><%= @occasion.description %></p>
+          </div>
+
+
+          <div class="box">
+            <h3 class="title is-4">Date and Time</h3>
+            <p><%= @occasion.date_time %></p>
+          </div>
+
+
+          <div class="box">
+            <h3 class="title is-4">Event Admin</h3>
+            <%= link_to @admin.name, user_path(@admin) %>
+          </div>
+
+
+          <div class="box">
+            <h3 class="title is-4">Invitees</h3>
+            <% @occasion.users.each do |user| %>
+              <%= link_to user.name, user %>
+            <% end %>
+            <% if  !@occasion.users.include?(current_user) %>
+              <%= button_to  "Attend event", "#{@occasion.id}/new_attendee" %>
+            <% end %>
+          </div>
+
+          <div class="box">
+            <h3 class="title is-4">Messages</h3>
+              <%= form_tag messages_path do %>
+              <div class="columns">
+                <div class="column is-one-third">
+                  <%= text_field_tag :"message[content]",'', class:'input' %><br>
+                  <%= hidden_field_tag :"message[occasion_id]", @occasion.id %>
+                  <%= hidden_field_tag :"message[user_id]", current_user.id %>
+                  <%= submit_tag "Submit Message", class:"button is-small" %>
+                </div>
+              </div>
+            <% end %><br><br>
+
+
+
+            <h3 class="title is-5">All messages</h3>
+            <div class="columns">
+              <div class="column is-two-thirds">
+                <div class="message_box">
+                    <% @my_messages.each do |msg|%>
+                    <div class="box"><%= msg.created_at.strftime("%-d %b %Y at %H:%M")  %>, <%= msg.user.name %>: <%= msg.content %></div>
+                    <% end %>
+                </div>
+              </div>
+            </div>
+
+
+
+
+
+
+          </div>
+
+        <% else %>
+
+            <h2>You must be invited to see this page</h2>
+
+        <% end %>
+      </div>
+    </div>
+  </div>
 </div>
-
-<% else %>
-
-    <h2>You must be invited to see this page</h2>
-
-<% end %>
